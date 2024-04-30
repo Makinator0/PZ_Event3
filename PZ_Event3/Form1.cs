@@ -29,19 +29,22 @@ namespace PZ_Event3
             listBoxRoom3.AllowDrop = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        ~Form1()
         {
-
-            using (var studentForm = new StudentForm())
-            {
-                if (studentForm.ShowDialog() == DialogResult.OK)
-                {
-                    Student newStudent = studentForm.CreatedStudent;
-                    int roomNumber = studentForm.RoomNumber;
-                    AddStudentToRoom(newStudent, roomNumber);
-                }
-            }
+            listBoxRoom1.MouseDown -= ListBox_MouseDown;
+            listBoxRoom2.MouseDown -= ListBox_MouseDown;
+            listBoxRoom3.MouseDown -= ListBox_MouseDown;
+            listBoxRoom1.MouseUp -= ListBox_MouseUp;
+            listBoxRoom2.MouseUp -= ListBox_MouseUp;
+            listBoxRoom3.MouseUp -= ListBox_MouseUp;
+            listBoxRoom1.DragOver -= ListBox_DragOver;
+            listBoxRoom2.DragOver -= ListBox_DragOver;
+            listBoxRoom3.DragOver -= ListBox_DragOver;
+            listBoxRoom1.DragDrop -= ListBox_DragDrop;
+            listBoxRoom2.DragDrop -= ListBox_DragDrop;
+            listBoxRoom3.DragDrop -= ListBox_DragDrop;
         }
+
         private void RegisterEventHandlers()
         {
             listBoxRoom1.DoubleClick += ListBox_DoubleClick;
@@ -57,6 +60,22 @@ namespace PZ_Event3
             listBoxRoom2.DragDrop += ListBox_DragDrop;
             listBoxRoom3.DragDrop += ListBox_DragDrop;
         }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            using (var studentForm = new StudentForm())
+            {
+                if (studentForm.ShowDialog() == DialogResult.OK)
+                {
+                    Student newStudent = studentForm.CreatedStudent;
+                    int roomNumber = studentForm.RoomNumber;
+                    AddStudentToRoom(newStudent, roomNumber);
+                }
+            }
+        }
+       
 
         private void buttonAddStudent_Click(object sender, EventArgs e)
         {
